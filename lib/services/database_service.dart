@@ -45,6 +45,19 @@ class DatabaseService {
     return await db.insert(AppConstants.tableReminders, reminder.toMap());
   }
 
+  Future<Reminder?> getReminder(int id) async {
+    final db = await instance.database;
+    final result = await db.query(
+      AppConstants.tableReminders,
+      where: '${AppConstants.colId} = ?',
+      whereArgs: [id],
+    );
+    if (result.isNotEmpty) {
+      return Reminder.fromMap(result.first);
+    }
+    return null;
+  }
+
   Future<List<Reminder>> getAllReminders() async {
     final db = await instance.database;
     final result = await db.query(AppConstants.tableReminders);

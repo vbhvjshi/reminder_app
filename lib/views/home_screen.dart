@@ -5,6 +5,8 @@ import 'package:reminder_app/views/reminder_list_screen.dart';
 import 'package:reminder_app/views/add_reminder_screen.dart';
 import 'package:reminder_app/views/widgets/category_card.dart';
 
+import '../services/notification_service.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -78,8 +80,20 @@ class HomeScreen extends StatelessWidget {
       color: AppColors.background,
       child: SafeArea(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            TextButton.icon(
+              onPressed: () async {
+                await NotificationService().testAlarm();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Test alarm scheduled for 10 seconds from now')),
+                  );
+                }
+              },
+              icon: const Icon(Icons.notification_important, color: AppColors.themeColor),
+              label: const Text('Test Alarm', style: TextStyle(color: AppColors.themeColor)),
+            ),
              GestureDetector(
               onTap: () => _showAddReminder(context),
               child: Container(

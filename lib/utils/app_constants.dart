@@ -61,7 +61,7 @@ class AppConstants {
   static const List<String> daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   // Notifications
-  static const String channelId = 'alarm_channel';
+  static const String channelId = 'alarm_notification_channel_v1';
   static const String channelName = 'Alarms';
   static const String channelDesc = 'Persistent alarm notifications';
   static const String soundAlarm = 'alarm_sound';
